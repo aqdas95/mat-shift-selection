@@ -129,6 +129,7 @@
             matInput
             [(ngModel)]="availableDate.startTime"
             [matAutocomplete]="auto"
+            (ngModelChange)="timeSelected()"
           />
           <mat-autocomplete #auto="matAutocomplete">
             <mat-option *ngFor="let option of time" [value]="option">
@@ -145,6 +146,7 @@
             matInput
             [(ngModel)]="availableDate.endTime"
             [matAutocomplete]="auto"
+            (ngModelChange)="timeSelected()"
           />
           <mat-autocomplete #auto="matAutocomplete">
             <mat-option *ngFor="let option of time" [value]="option">

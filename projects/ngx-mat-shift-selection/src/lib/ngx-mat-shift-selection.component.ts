@@ -338,6 +338,10 @@ export class NgxMatShiftSelectionComponent implements OnInit, OnChanges {
     }
     this.onSelectDate.emit(this.sortedDates);
   }
+
+  timeSelected() {
+    this.onSelectDate.emit(this.sortedDates);
+  }
 }
 
 export interface CalendarDate {
