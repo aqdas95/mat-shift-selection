@@ -1,24 +1,31 @@
 # NgxMatShiftSelection
 
-This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.2.14.
+This is a simple date and time selection component design specificly for job shifts etc, with 24-hours available option.
 
-## Code scaffolding
+## Installation:
+1. Download from npm:
+`npm install ngx-mat-shift-selection --save`  
+2. import the `NgxMatShiftSelectionModule` module:  
+ `import { NgxMatShiftSelectionModule } from 'ngx-mat-shift-selection';`  
+3. Add `NgxMatShiftSelectionModule` to your module imports:  
+```ts
+ @NgModule({
+   ...
+   imports: [
+     ...
+     NgxMatShiftSelectionModule
+   ]
+ })
+```
+## Usage
+Put the <ngx-mat-shift-selection></ngx-mat-shift-selection> component selector wherever you need it.
 
-Run `ng generate component component-name --project NgxMatShiftSelection` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module --project NgxMatShiftSelection`.
-> Note: Don't forget to add `--project NgxMatShiftSelection` or else it will be added to the default project in your `angular.json` file. 
 
-## Build
+### Attributes:  
 
-Run `ng build NgxMatShiftSelection` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Publishing
-
-After building your library with `ng build NgxMatShiftSelection`, go to the dist folder `cd dist/ngx-mat-shift-selection` and run `npm publish`.
-
-## Running unit tests
-
-Run `ng test NgxMatShiftSelection` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+| Name                 | Type               | Default                                                                   | description                                                                                                                                                                                                                  |
+|----------------------|:------------------:|:------------------------------------------------------------------------:|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| selectedDates             | `Input` -> `CalendarDate[]`          | `[]`                                                  | This input `selectedDates` data that will be shown in the calendar when the component initiates.                     |
+| calendarType              | `Input` -> `String`                | `"month"`                                               | The input `calendarType` changes the view of the calendar, available options: `"month"` and `"week"`.                |
+| class                     | `Input` -> `String`                | `""`                                                    | This is a simple class string that you wish to apply to the main div of the component e.g. `[class]="'mat-elevation-z4 p-4'"` etc                                                                                                             |
+| onSelectDate              | `Input` -> `EventEmitter<CalendarDate[]>`     |                                              | This is the output event for the component that emit back selected values to it parent.                              |

@@ -4,5 +4,26 @@
   "peerDependencies": {
     "@angular/common": "^8.2.14",
     "@angular/core": "^8.2.14"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/aqdas95/mat-shift-selection.git"
+  },
+  "keywords": [
+    "Angular",
+    "Date Picker",
+    "Time Selector",
+    "Timers",
+    "Shift Selector",
+    "Multi Date Picker",
+    "Time Picker",
+    "Shift Picker",
+    "Material Design"
+  ],
+  "author": "Aqdas Malik",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/aqdas95/mat-shift-selection/issues"
+  },
+  "homepage": "https://github.com/aqdas95/mat-shift-selection"
 }
