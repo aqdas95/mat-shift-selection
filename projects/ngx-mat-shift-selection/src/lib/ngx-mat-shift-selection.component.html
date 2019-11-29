@@ -1,0 +1,159 @@
+<div fxLayout="column" [ngClass]="class" class="calendar">
+  <div fxLayout="column" class="calendar-navs" *ngIf="calendarType != 'week'">
+    <div class="month-nav" fxLayout="row" fxLayoutAlign="space-between center">
+      <button mat-icon-button (click)="prevMonth()">
+        <mat-icon>arrow_back_ios</mat-icon>
+      </button>
+      <span class="title p4 mt-1">{{ currentDate.format("MMMM") }}</span>
+      <button mat-icon-button (click)="nextMonth()">
+        <mat-icon>arrow_forward_ios</mat-icon>
+      </button>
+    </div>
+    <div class="year-nav" fxLayout="row" fxLayoutAlign="space-between center">
+      <button mat-icon-button (click)="prevYear()">
+        <mat-icon>arrow_back_ios</mat-icon>
+      </button>
+      <span class="mt-1">{{ currentDate.format("YYYY") }}</span>
+      <button mat-icon-button (click)="nextYear()">
+        <mat-icon>arrow_forward_ios</mat-icon>
+      </button>
+    </div>
+  </div>
+  <div fxLayout="column" class="calendar-navs" *ngIf="calendarType == 'week'">
+    <div class="month-nav" fxLayout="row" fxLayoutAlign="space-between center">
+      <button mat-icon-button (click)="prevWeek()">
+        <mat-icon>arrow_back_ios</mat-icon>
+      </button>
+      <span class="title p4 mt-1">{{ currentDate.format("MMMM YYYY") }}</span>
+      <button mat-icon-button (click)="nextWeek()">
+        <mat-icon>arrow_forward_ios</mat-icon>
+      </button>
+    </div>
+  </div>
+  <mat-divider></mat-divider>
+  <div fxLayout="column" class="month-grid">
+    <div class="day-names" fxLayout="row" fxLayoutAlign="space-between center">
+      <div
+        fxFlex="14"
+        *ngFor="let name of dayNames"
+        class="day-name p9"
+        style="text-align: center;"
+      >
+        {{ name }}
+      </div>
+    </div>
+    <div class="weeks" fxLayout="column">
+      <div
+        *ngFor="let week of weeks"
+        class="week"
+        style="text-align: center;"
+        fxLayout="row"
+        fxLayoutAlign="space-between center"
+      >
+        <ng-container *ngFor="let day of week">
+          <div fxFlex="14" class="week-date disabled" *ngIf="isPast(day.mDate)">
+            <span class="date-text">{{ day.mDate.date() }}</span>
+          </div>
+          <div
+            fxFlex="14"
+            class="week-date enabled"
+            *ngIf="!isPast(day.mDate)"
+            (click)="selectDate(day)"
+          >
+            <div
+              fxLayout="row"
+              fxLayoutAlign="center center"
+              [ngClass]="{
+                today: day.today,
+                fullTimeSelected: day.isFullTime,
+                selected: day.selected
+              }"
+            >
+              <span class="date-text">{{ day.mDate.date() }}</span>
+            </div>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+  <mat-divider></mat-divider>
+  <div class="row justify-content-between p-05">
+    <div class="col-12 mb-1">
+      Select All Days
+      <mat-checkbox
+        [checked]="selectAll"
+        (change)="selectAllChecked()"
+      ></mat-checkbox>
+    </div>
+  </div>
+  <mat-divider></mat-divider>
+  <ng-container *ngIf="sortedDates.length > 0">
+    <div class="p-05" fxLayout="row" fxLayoutAlign="start center">
+      <div fxFlex="50">Select Available Time</div>
+      <div fxFlex="50" class="text-right">
+        <mat-checkbox
+          [checked]="availableAll"
+          (change)="availableAllChecked()"
+        >
+      </mat-checkbox>
+      Available 24 Hours
+      </div>
+    </div>
+    <mat-divider></mat-divider>
+  </ng-container>
+  <div *ngFor="let availableDate of sortedDates">
+    <div class="mt-1" *ngIf="availableDate.isTimerVisible">
+      <div fxLayout="row" fxLayoutAlign="start center" class="p-05">
+        <div fxFlex="50">{{ availableDate.mDate.format("LL") }}</div>
+        <div fxFlex="50" class="text-right">
+          <mat-checkbox
+            [(ngModel)]="availableDate.isFullTime"
+            (ngModelChange)="fullTimeChecked(availableDate)"
+            aria-label="Checkbox for following text input"
+          >
+        </mat-checkbox>
+        Available 24 Hours
+        </div>
+      </div>
+      <div
+        fxLayout="row"
+        fxLayoutAlign="start center"
+        *ngIf="!availableDate.isFullTime"
+        class="p-05"
+      >
+        <mat-form-field fxFlex="40">
+          <input
+            type="text"
+            placeholder="Start Time"
+            aria-label="Number"
+            matInput
+            [(ngModel)]="availableDate.startTime"
+            [matAutocomplete]="auto"
+          />
+          <mat-autocomplete #auto="matAutocomplete">
+            <mat-option *ngFor="let option of time" [value]="option">
+              {{ option }}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+        <span class="text-center" fxFlex="20">to</span>
+        <mat-form-field fxFlex="40">
+          <input
+            type="text"
+            placeholder="End Time"
+            aria-label="Number"
+            matInput
+            [(ngModel)]="availableDate.endTime"
+            [matAutocomplete]="auto"
+          />
+          <mat-autocomplete #auto="matAutocomplete">
+            <mat-option *ngFor="let option of time" [value]="option">
+              {{ option }}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+      </div>
+      <mat-divider></mat-divider>
+    </div>
+  </div>
+</div>

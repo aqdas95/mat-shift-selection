@@ -17,7 +17,15 @@
     "lib": [
       "es2018",
       "dom"
-    ]
+    ],
+    "paths": {
+      "ngx-mat-shift-selection": [
+        "dist/ngx-mat-shift-selection"
+      ],
+      "ngx-mat-shift-selection/*": [
+        "dist/ngx-mat-shift-selection/*"
+      ]
+    }
   },
   "angularCompilerOptions": {
     "fullTemplateTypeCheck": true,
